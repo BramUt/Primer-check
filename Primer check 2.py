@@ -127,6 +127,7 @@ def primer_searcher(seq, max_cg, min_cg, max_tm, min_tm, max_len, min_len):
                 if min_cg <= info_list[3] <= max_cg and \
                         min_tm <= info_list[4] <= max_tm and \
                         info_list[5] >= min_len:
+                    info_list.append(str(nuc+1))
                     primer_list.append(list(map(str, info_list)))
 
     return primer_list
@@ -188,13 +189,15 @@ def file_writer(forward_list, reverse_list):
     """
 
     with open("Resultaten.csv", "w") as res_file:
-        kopje = "Forward primers\nSeq 5'-3',CG,AT,CG%,Smelt temp,Length\n"
+        kopje = ("Forward primers\nSeq 5'-3',CG,AT,CG%,Smelt temp,"
+                 "Length,Position\n")
         res_file.write(kopje)
         for x in forward_list:
             temp_string = str(",".join(x) + "\n")
             res_file.write(temp_string)
 
-        kopje_2 = "\nReverse Primers\nSeq 5'-3',CG,AT,CG%,Smelt temp,Length\n"
+        kopje_2 = ("\nReverse Primers\nSeq 5'-3',CG,AT,CG%,Smelt temp,"
+                   "Length,Position\n")
         res_file.write(kopje_2)
         for y in reverse_list:
             temp_string = str(",".join(y) + "\n")
