@@ -119,15 +119,11 @@ def primer_searcher(seq, max_cg, min_cg, max_tm, min_tm, max_len, min_len):
 
     primer_list = []
 
-    print(seq)
-
     for nuc in range(len(seq)):
         if nuc != len(seq)-min_len:
             for length in range(min_len, max_len):
                 temp_seq = seq[nuc: nuc + length]
                 info_list = seq_info(temp_seq)
-
-                print(info_list[3])
                 if min_cg <= info_list[3] <= max_cg and \
                         min_tm <= info_list[4] <= max_tm and \
                         info_list[5] >= min_len:
@@ -174,7 +170,7 @@ def complementing_strand(seq):
 def seq_info(seq):
     """
     """
-    print("Check info", seq)
+
     at_count = seq.count("A") + seq.count("T")
     cg_count = seq.count("C") + seq.count("G")
     cg_perc = round((cg_count / len(seq)*100),2)
@@ -194,7 +190,6 @@ def file_writer(forward_list, reverse_list):
     with open("Resultaten.csv", "w") as res_file:
         kopje = "Forward primers\nSeq 5'-3',CG,AT,CG%,Smelt temp,Length\n"
         res_file.write(kopje)
-        print(forward_list)
         for x in forward_list:
             temp_string = str(",".join(x) + "\n")
             res_file.write(temp_string)
@@ -217,10 +212,9 @@ def main():
 
     five_utr_seq = seq_stove(pre_seq_5).upper()
 
-    print("5' UTR\n", five_utr_seq)
-
     max_cg, min_cg, max_tm, min_tm, max_len, min_len = list(map(int, gui_2()))
 
+    print("5' UTR\n", five_utr_seq)
     print("3' UTR:\n", three_utr_seq)
 
     rev_primers = primer_searcher(three_utr_seq, max_cg, min_cg, max_tm,
@@ -228,9 +222,6 @@ def main():
 
     fw_primers = primer_searcher(five_utr_seq, max_cg, min_cg, max_tm, min_tm,
                                  max_len, min_len)
-
-    # print("rev:", rev_primers)
-    # print("FW:", fw_primers)
 
     file_writer(fw_primers, rev_primers)
 
