@@ -8,23 +8,18 @@ class Gui:
         def clicked_5():
             self.raw_seq_5 = txt_5.get("1.0", END)
             txt_5.configure(state='disabled', bg="light grey")
-            return raw_seq_5
 
         def clicked_3():
-            raw_seq_3 = txt_3.get("1.0", END)
+            self.raw_seq_3 = txt_3.get("1.0", END)
             txt_3.configure(state="disabled", bg="light grey")
-            return raw_seq_3
 
         window = Tk()
         window.title("Primer check 2")
         window.geometry("750x500")
 
-        raw_seq_5 ="Nee"
-
         label_5 = Label(window, text="Enter 5'-UTR")
         txt_5 = scrolledtext.ScrolledText(window, width=40, height=20)
-        button_5 = Button(window, text="OK", state='active',
-                          command=clicked_5)
+        button_5 = Button(window, text="OK", command=clicked_5)
         label_5.grid(column=0, row=0, sticky=W)
         txt_5.grid(column=0, row=1)
         button_5.grid(column=0, row=2, sticky=E)
@@ -42,7 +37,21 @@ class Gui:
 
         window.mainloop()
 
-        print(self.raw_seq_5)
+
+def fun_return():
+    return Gui()
 
 
-Gui()
+def main():
+
+    res = fun_return()
+
+    seq_3, seq_5 = res.raw_seq_3, res.raw_seq_5
+
+    print(seq_3, seq_5)
+
+
+
+main()
+
+
