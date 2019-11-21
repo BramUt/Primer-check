@@ -49,19 +49,19 @@ def fun_return():
 
 def gui_2():
 
-    window_2 = Tk()
+    window_2 = Toplevel()
     window_2.title("Primer check 2: parameter")
     window_2.geometry("230x260")
 
-    var_1, var_2, var_3, var_4, var_5, var_6 = IntVar(), IntVar(), IntVar(), \
-                                               IntVar(), IntVar(), IntVar()
+    var_1, var_2, var_3 = IntVar(), IntVar(), IntVar()
+    var_4, var_5, var_6 = IntVar(), IntVar(), IntVar()
 
     var_1.set(60)
     var_2.set(40)
-    var_3.set(55)
-    var_4.set(62)
-    var_5.set(18)
-    var_6.set(25)
+    var_3.set(62)
+    var_4.set(55)
+    var_5.set(25)
+    var_6.set(18)
 
     label_maxcg = Label(window_2, text="Max CG%", font=("Arial", 12))
     selector_maxcg = Spinbox(window_2, from_=0, to=100, width=5,
@@ -89,8 +89,7 @@ def gui_2():
     selector_mintm.grid(column=0, row=7, sticky=W)
 
     label_maxlen = Label(window_2, text="Max primer length", font=("Arial", 12))
-    selector_maxlen = Spinbox(window_2, from_=0, to=100, width=5,
-                              textvariable=var_5, font=("Arial", 12))
+    selector_maxlen = Spinbox(window_2, from_=0, to=100, width=5, textvariable=var_5, font=("Arial", 12))
     label_maxlen.grid(column=0, row=8, sticky=W)
     selector_maxlen.grid(column=0, row=9, sticky=W)
 
@@ -125,12 +124,11 @@ def primer_searcher(seq, max_cg, min_cg, max_tm, min_tm, max_len, min_len):
     for nuc in range(len(seq)):
         if nuc != len(seq)-min_len:
             for length in range(min_len, max_len):
-                temp_seq = seq[nuc:length]
-                print(temp_seq)
+                temp_seq = seq[nuc: nuc + length]
                 info_list = seq_info(temp_seq)
 
                 if (min_cg >= info_list[3] <= max_cg and
-                        min_tm >= info_list[4] <= max_tm):
+                        min_tm >= info_list[4] <= max_tm and info_list[5] >= min_len):
                     primer_list.append(list(map(str, info_list)))
 
     return primer_list
@@ -174,7 +172,7 @@ def complementing_strand(seq):
 def seq_info(seq):
     """
     """
-    print("seq", seq)
+    print("Check info", seq)
     at_count = seq.count("A") + seq.count("T")
     cg_count = seq.count("C") + seq.count("G")
     cg_perc = round((cg_count / len(seq)*100),2)
@@ -194,6 +192,7 @@ def file_writer(forward_list, reverse_list):
     with open("Resultaten.csv", "w") as res_file:
         kopje = "Forward primers\nSeq 5'-3',CG,AT,CG%,Smelt temp,Length\n"
         res_file.write(kopje)
+        print(forward_list)
         for x in forward_list:
             temp_string = str(",".join(x) + "\n")
             res_file.write(temp_string)
@@ -216,13 +215,20 @@ def main():
 
     five_utr_seq = seq_stove(pre_seq_5).upper()
 
+    print("5' UTR\n", five_utr_seq)
+
     max_cg, min_cg, max_tm, min_tm, max_len, min_len = list(map(int, gui_2()))
 
-    rev_primers = primer_searcher(three_utr_seq, max_cg, min_cg, max_tm,
-                                  min_tm, max_len, min_len)
+    print("3' UTR:\n", three_utr_seq)
+
+    # rev_primers = primer_searcher(three_utr_seq, max_cg, min_cg, max_tm,
+    #                               min_tm, max_len, min_len)
 
     fw_primers = primer_searcher(five_utr_seq, max_cg, min_cg, max_tm, min_tm,
                                  max_len, min_len)
+
+    # print("rev:", rev_primers)
+    # print("FW:", fw_primers)
 
     file_writer(fw_primers, rev_primers)
 
