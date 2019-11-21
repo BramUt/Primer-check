@@ -108,12 +108,15 @@ def gui_2():
     max_len = selector_maxlen.get()
     min_len = selector_minlen.get()
 
-    return [max_cg, min_cg, max_tm, min_tm, max_len, min_len]
+    return max_cg, min_cg, max_tm, min_tm, max_len, min_len
 
 
+def primer_searcher(seq, max_cg, min_cg, max_tm, min_tm, max_len, min_len):
 
-def primer_searcher(utr):
-    pass
+    for counter, nuc in enumerate(seq):
+        if counter != len(seq)-min_len:
+            for length in range(max_len-min_len):
+
 
 
 def seq_stove(raw_seq):
@@ -209,7 +212,14 @@ def main():
 
     five_utr_seq = seq_stove(pre_seq_5).upper()
 
-    gui_2()
+    max_cg, min_cg, max_tm, min_tm, max_len, min_len = gui_2()
+
+    rev_primers = primer_searcher(three_utr_seq, max_cg, min_cg, max_tm,
+                                  min_tm, max_len, min_len)
+
+    fw_primers = primer_searcher(five_utr_seq, max_cg, min_cg, max_tm, min_tm,
+                                 max_len, min_len)
+
 
 
 main()
