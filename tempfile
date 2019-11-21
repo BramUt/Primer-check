@@ -4,3 +4,5 @@
     • Geen complementaire regios
     • Zo min mogelijk zelfde nucleotiden achter elkaar
     • GC aan het eind
+
+    [seq, cg_count, at_count, cg_perc, smelt_temp, length]
