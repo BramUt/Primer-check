@@ -3,7 +3,6 @@ from tkinter.ttk import *
 
 
 def gui_2():
-
     window = Tk()
     window.title("Primer check 2: parameter")
     window.geometry("250x175")
