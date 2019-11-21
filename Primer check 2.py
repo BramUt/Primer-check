@@ -127,8 +127,10 @@ def primer_searcher(seq, max_cg, min_cg, max_tm, min_tm, max_len, min_len):
                 temp_seq = seq[nuc: nuc + length]
                 info_list = seq_info(temp_seq)
 
-                if (min_cg >= info_list[3] <= max_cg and
-                        min_tm >= info_list[4] <= max_tm and info_list[5] >= min_len):
+                print(info_list[3])
+                if min_cg <= info_list[3] <= max_cg and \
+                        min_tm <= info_list[4] <= max_tm and \
+                        info_list[5] >= min_len:
                     primer_list.append(list(map(str, info_list)))
 
     return primer_list
@@ -221,8 +223,8 @@ def main():
 
     print("3' UTR:\n", three_utr_seq)
 
-    # rev_primers = primer_searcher(three_utr_seq, max_cg, min_cg, max_tm,
-    #                               min_tm, max_len, min_len)
+    rev_primers = primer_searcher(three_utr_seq, max_cg, min_cg, max_tm,
+                                  min_tm, max_len, min_len)
 
     fw_primers = primer_searcher(five_utr_seq, max_cg, min_cg, max_tm, min_tm,
                                  max_len, min_len)
