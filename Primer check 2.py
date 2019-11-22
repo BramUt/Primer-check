@@ -169,7 +169,12 @@ def complementing_strand(seq):
 
 
 def seq_info(seq):
-    """
+    """Takes a sequence and returns a list with the sequence, cg count,
+    at count, cg% smelt temperature and length
+
+    Input:  seq - str, DNA sequence
+
+    Output: a list
     """
 
     at_count = seq.count("A") + seq.count("T")
