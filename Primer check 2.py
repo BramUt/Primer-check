@@ -89,7 +89,8 @@ def gui_2():
     selector_mintm.grid(column=0, row=7, sticky=W)
 
     label_maxlen = Label(window_2, text="Max primer length", font=("Arial", 12))
-    selector_maxlen = Spinbox(window_2, from_=0, to=100, width=5, textvariable=var_5, font=("Arial", 12))
+    selector_maxlen = Spinbox(window_2, from_=0, to=100, width=5,
+                              textvariable=var_5, font=("Arial", 12))
     label_maxlen.grid(column=0, row=8, sticky=W)
     selector_maxlen.grid(column=0, row=9, sticky=W)
 
