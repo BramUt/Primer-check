@@ -88,13 +88,15 @@ def gui_2():
     label_mintm.grid(column=0, row=6, sticky=W)
     selector_mintm.grid(column=0, row=7, sticky=W)
 
-    label_maxlen = Label(window_2, text="Max primer length", font=("Arial", 12))
+    label_maxlen = Label(window_2, text="Max primer length",
+                         font=("Arial", 12))
     selector_maxlen = Spinbox(window_2, from_=0, to=100, width=5,
                               textvariable=var_5, font=("Arial", 12))
     label_maxlen.grid(column=0, row=8, sticky=W)
     selector_maxlen.grid(column=0, row=9, sticky=W)
 
-    label_minlen = Label(window_2, text="Min primer length", font=("Arial", 12))
+    label_minlen = Label(window_2, text="Min primer length",
+                         font=("Arial", 12))
     selector_minlen = Spinbox(window_2, from_=0, to=100, width=5,
                               textvariable=var_6, font=("Arial", 12))
     label_minlen.grid(column=0, row=10, sticky=W)
@@ -117,6 +119,18 @@ def gui_2():
 
 
 def primer_searcher(seq, max_cg, min_cg, max_tm, min_tm, max_len, min_len):
+    """Looks for primers in a sequence based on given parameters.
+
+    Input:  seq - str, DNA sequence
+            max_cg - int, the highest cg% the primer can have.
+            min_cg - int, the lowest cg% the primer can have.
+            max_tm - int
+            min_tm - int
+            max_len - int, the longest the primer can be.
+            min_len - int, the primer can be.
+
+    Output: primer_list - list, nested list with primers and info.
+    """
 
     primer_list = []
 
