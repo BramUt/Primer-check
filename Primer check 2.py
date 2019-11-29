@@ -33,7 +33,7 @@ class InputGui:
         button_3 = Button(window, text="Enter", command=clicked_3)
         label_3.grid(column=3, row=0, sticky=W, padx=10)
         txt_3.grid(column=3, row=1, padx=10)
-        button_3.grid(column=3, row=2, sticky=E, padx=10)
+        button_3.grid(column=3, row=2, sticky=E)
 
         exit_button = Button(window, text="Continue",
                              command=lambda: window.quit(),
@@ -51,7 +51,7 @@ def gui_2():
 
     window_2 = Toplevel()
     window_2.title("Primer check 2: parameter")
-    window_2.geometry("230x260")
+    window_2.geometry("215x280")
 
     var_1, var_2, var_3 = IntVar(), IntVar(), IntVar()
     var_4, var_5, var_6 = IntVar(), IntVar(), IntVar()
