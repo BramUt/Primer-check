@@ -124,8 +124,8 @@ def primer_searcher(seq, max_cg, min_cg, max_tm, min_tm, max_len, min_len):
     Input:  seq - str, DNA sequence
             max_cg - int, the highest cg% the primer can have.
             min_cg - int, the lowest cg% the primer can have.
-            max_tm - int
-            min_tm - int
+            max_tm - int, the highest smeltingtemperature the primer can have.
+            min_tm - int, the lowst smeltingtemperature the primer can have.
             max_len - int, the longest the primer can be.
             min_len - int, the primer can be.
 
