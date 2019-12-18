@@ -221,8 +221,8 @@ def main():
 
     print("3' UTR:\n", three_utr_seq)
 
-    # rev_primers = primer_searcher(three_utr_seq, max_cg, min_cg, max_tm,
-    #                               min_tm, max_len, min_len)
+    rev_primers = primer_searcher(three_utr_seq, max_cg, min_cg, max_tm,
+                                  min_tm, max_len, min_len)
 
     fw_primers = primer_searcher(five_utr_seq, max_cg, min_cg, max_tm, min_tm,
                                  max_len, min_len)
